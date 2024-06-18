@@ -1,20 +1,25 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import fetchPet from "./fetchPet";
 import { useQuery } from "@tanstack/react-query";
 import Carousel from "./Carousel";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Modal from "./Modal";
+import AdoptedPetContext from "./AdoptedPetContext";
 
 const Details = () => {
   const { id } = useParams();
   const result = useQuery(["details", id], fetchPet);
   const [showModal, setShowModal] = useState(false);
 
+  const naviagte = useNavigate(); // to got to the home after clicking yes button
+
+  const [_, setAdoptedPet] = useContext(AdoptedPetContext);
+
   if (result.isLoading) {
     return (
-      <>
-        <h1>loading</h1>
-      </>
+      <div className="loading-pane">
+        <h2 className="loader">🌀</h2>
+      </div>
     );
   }
 
@@ -39,7 +44,14 @@ const Details = () => {
               <div>
                 <h1>{`Would you like to adopt ${pet.name}`}</h1>
                 <div className="buttons">
-                  <button>Yes</button>
+                  <button
+                    onClick={() => {
+                      setAdoptedPet(pet);
+                      naviagte("/");
+                    }}
+                  >
+                    Yes
+                  </button>
                   <button
                     onClick={() => {
                       setShowModal(false);

@@ -4,10 +4,17 @@ const ANIMALS = ["bird", "cat", "dog", "rabbit"];
 import useBreedList from "./useBreedList";
 import Results from "./Results";
 import fetchSearch from "./fetchSearch";
+import { useContext } from "react";
+import AdoptedPetContext from "./AdoptedPetContext";
 
 const SearchParams = () => {
   // const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
+  let [adoptedPet, setAdoptedPet] = useContext(AdoptedPetContext);
+  if (adoptedPet) {
+    adoptedPet = adoptedPet.images[0].replace("http", "https");
+    // console.log(adoptImage);
+  }
   // const [breed, setBreed] = useState("");
   // const [pets, setPets] = useState([]);
   const BREEDS = useBreedList(animal);
@@ -48,6 +55,11 @@ const SearchParams = () => {
           setParams(object);
         }}
       >
+        {adoptedPet ? (
+          <div className="pet image-conatiner">
+            <img src={adoptedPet} />
+          </div>
+        ) : null}
         <label htmlFor="location">
           location
           <input
@@ -58,7 +70,6 @@ const SearchParams = () => {
             // value={location}
           ></input>
         </label>
-
         <label htmlFor="animal">
           animal
           <select
@@ -73,7 +84,6 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
-
         <label htmlFor="breed">
           breed
           <select

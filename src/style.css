@@ -57,6 +57,7 @@ body {
 .pet img {
   width: 100px;
   min-height: 100px;
+  
 }
 
 .info {
@@ -74,6 +75,12 @@ body {
   height: 100px;
   float: left;
   margin: 0px 20px 0px 10px;
+}
+form div.pet{
+  border:none
+}
+form div.pet img{
+  border-radius:100px;
 }
 
 .pet h1 {
@@ -95,7 +102,8 @@ header > a,
   width: 279px;
   height: 76px;
   overflow: hidden;
-
+  /* text-indent: -9999px; */
+ font-size: 40px;
   margin: 20px 0;
 }
 
@@ -108,8 +116,8 @@ header > a,
 }
 
 header a {
-  color:black;
-  font-size: 50px;
+  color: #333;
+  font-size: 30px;
   text-decoration: none;
   font-weight: bold;
   display: block;
